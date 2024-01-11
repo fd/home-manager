@@ -12,23 +12,8 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.
-    # pkgs.hello
 
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
-
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
-
+    # Install the _update and switch_ script
     (pkgs.writeShellScriptBin "do-update-home-manager" ''
       exec home-manager switch --refresh --update-input home-manager
     '')
@@ -73,4 +58,15 @@
   programs.gh.enable = true;
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
+
+  nix.settings = {
+    extra-substituters = [
+      "https://alpha.pigeon-blues.ts.net/attic/develop"
+      "https://alpha.pigeon-blues.ts.net/attic/build"
+    ];
+    extra-trusted-public-keys = [
+      "develop:g8DK7dPXGkipkqGEz92jSvbqFI87mFBRcnin0g2WbYY="
+      "build:ks4ql2Pq6tLQOENz6AHWZpB8Qc+If/AOC0jjj65PkR8="
+    ];
+  };
 }
