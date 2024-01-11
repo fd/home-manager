@@ -23,6 +23,11 @@
         --refresh
       exec home-manager switch --refresh --update-input home-manager -b backup
     '')
+
+    # Install the _update and switch_ script
+    (pkgs.writeShellScriptBin "x-www-browser" ''
+      exec mac open "$@"
+    '')
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
