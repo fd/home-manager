@@ -1,4 +1,4 @@
-{ pkgs, stdenv, system, home-manager, ... }:
+{ self, pkgs, stdenv, system, home-manager, ... }:
 assert stdenv.isLinux;
 let
   cmd = "${home-manager.packages.${system}.default}/bin/home-manager";
@@ -7,10 +7,9 @@ pkgs.writeShellScriptBin "home-installer"
   ''
     set -e
 
-    nix flake check github:fd/home-manager \
+    nix flake check github:fd/home-manager${if self ? rev then "/${self.rev}" else ""} \
       --extra-substituters https://alpha.pigeon-blues.ts.net/attic/release-public \
-      --extra-trusted-public-keys release-public:RLOvxX/CMLa6ffQ5oUDXA5zt/qjMN3u4z6GW+xZ1gWw= \
-      --refresh
+      --extra-trusted-public-keys release-public:RLOvxX/CMLa6ffQ5oUDXA5zt/qjMN3u4z6GW+xZ1gWw=
 
     hmConfigDir="$HOME/.config/home-manager"
 

@@ -59,6 +59,7 @@
   programs.home-manager.enable = true;
   programs.vim.enable = true;
   programs.bash.enable = true;
+  programs.starship.enable = true;
   programs.atuin.enable = true;
   programs.git.enable = true;
   programs.gh.enable = true;
