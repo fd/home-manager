@@ -12,6 +12,12 @@
 
   outputs = { self, nixpkgs, home-manager }: {
     checks.x86_64-linux.hm = (self.lib.mkHomeManagerConfiguration "x86_64-linux" "testuser").activationPackage;
+    packages.x86_64-linux.default =
+      let
+        system = "x86_64-linux";
+        pkgs = import nixpkgs { inherit system; };
+      in
+      pkgs.callPackage ./installer/command.nix { inherit home-manager; };
 
     lib.mkHomeManagerConfiguration = system: username:
       let
