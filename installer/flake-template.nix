@@ -1,16 +1,15 @@
-# This header is automatically generated. Do not edit.
-# let
-#   username = "__USER__";
-#   system = "__SYSTEM__";
-# in
 {
-  description = "Home Manager configuration of ${username}";
+  description = "Home Manager configuration";
 
   inputs = {
     home-manager.url = "github:fd/home-manager";
   };
 
-  outputs = { self, home-manager }: {
-    homeConfigurations."${username}" = home-manager.lib.mkHomeManagerConfiguration system username;
-  };
+  outputs = { self, home-manager }:
+    let
+      cfg = import ./settings.nix;
+    in
+    {
+      homeConfigurations."${cfg.username}" = home-manager.lib.mkHomeManagerConfiguration cfg.system cfg.username;
+    };
 }

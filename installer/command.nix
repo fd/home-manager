@@ -10,13 +10,14 @@ pkgs.writeShellScriptBin "home-installer"
 
     mkdir -p "$hmConfigDir"
 
-    cat <<EOF > "$hmConfigDir/flake.nix"
-    let
+    cat <<EOF > "$hmConfigDir/settings.nix"
+    {
       username = "$USER";
       system = "${system}";
-    in
+    }
     EOF
-    cat ${./flake-template.nix} >> "$hmConfigDir/flake.nix"
+
+    cat ${./flake-template.nix} > "$hmConfigDir/flake.nix"
 
     exec ${cmd} switch
   ''
