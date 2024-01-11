@@ -56,6 +56,7 @@
   programs.atuin.enable = true;
   programs.git.enable = true;
   programs.gh.enable = true;
+  programs.gh.gitCredentialHelper.enable = true;
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
 
