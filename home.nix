@@ -59,6 +59,7 @@
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
 
+  nix.package = pkgs.nix;
   nix.settings = {
     extra-substituters = [
       "https://alpha.pigeon-blues.ts.net/attic/develop"
