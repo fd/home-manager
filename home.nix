@@ -26,6 +26,7 @@
 
     # Install the _update and switch_ script
     (pkgs.writeShellScriptBin "x-www-browser" ''
+      echo "Opening $@" > /dev/stderr
       exec mac open "$@"
     '')
   ];
