@@ -15,7 +15,7 @@
 
     # Install the _update and switch_ script
     (pkgs.writeShellScriptBin "do-update-home-manager" ''
-      exec home-manager switch --refresh --update-input home-manager
+      exec home-manager switch --refresh --update-input home-manager -b backup
     '')
   ];
 

@@ -20,5 +20,5 @@ pkgs.writeShellScriptBin "home-installer"
 
     cat ${./flake-template.nix} > "$hmConfigDir/flake.nix"
 
-    exec ${cmd} switch
+    exec ${cmd} switch -b backup
   ''
