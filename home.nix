@@ -59,6 +59,7 @@
   #
   home.sessionVariables = {
     # EDITOR = "emacs";
+    GH_BROWSER = "x-www-browser";
   };
 
   # Let Home Manager install and manage itself.
