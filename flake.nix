@@ -45,7 +45,9 @@
               command = ''
                 ${pkgs.attic-client}/bin/attic push alpha:release-public \
                   $(nix build .#checks.x86_64-linux.hm --no-link --print-out-paths) \
-                  $(nix build .#checks.aarch64-linux.hm --no-link --print-out-paths)
+                  $(nix build .#checks.aarch64-linux.hm --no-link --print-out-paths) \
+                  $(nix build .#checks.x86_64-linux.installer --no-link --print-out-paths) \
+                  $(nix build .#checks.aarch64-linux.installer --no-link --print-out-paths)
               '';
             }
           ];
