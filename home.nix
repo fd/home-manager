@@ -69,4 +69,8 @@
   programs.vim.enable = true;
   programs.bash.enable = true;
   programs.atuin.enable = true;
+  programs.git.enable = true;
+  programs.gh.enable = true;
+  programs.direnv.enable = true;
+  programs.direnv.nix-direnv.enable = true;
 }
