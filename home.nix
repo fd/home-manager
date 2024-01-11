@@ -12,6 +12,7 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
+    pkgs.vault
 
     # Install the _update and switch_ script
     (pkgs.writeShellScriptBin "do-update-home-manager" ''
