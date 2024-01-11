@@ -1,4 +1,5 @@
-{ pkgs, system, home-manager, ... }:
+{ pkgs, stdenv, system, home-manager, ... }:
+assert stdenv.isLinux;
 let
   cmd = "${home-manager.packages.${system}.default}/bin/home-manager";
 in
