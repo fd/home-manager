@@ -11,12 +11,16 @@
     attic.url = "github:zhaofengli/attic";
 
     flake-utils.url = "github:numtide/flake-utils";
+    devshell.url = "github:numtide/devshell";
   };
 
-  outputs = { self, nixpkgs, flake-utils, home-manager, attic }:
+  outputs = { self, nixpkgs, flake-utils, devshell, home-manager, attic }:
     (flake-utils.lib.eachSystem [ "x86_64-linux" "aarch64-linux" ] (system:
       let
-        pkgs = import nixpkgs { inherit system; };
+        pkgs = import nixpkgs {
+          inherit system;
+          overlays = [ devshell.overlays.default ];
+        };
       in
       {
         # Ensure we can build Home Manager activation package
@@ -29,6 +33,20 @@
         packages = {
           default = pkgs.callPackage ./installer/command.nix { inherit self home-manager; };
         };
+
+        devShells.default = pkgs.devshell.mkShell ({ config, ... }: {
+          commands = [
+            {
+              help = "Push release artifacts to our public attic cache";
+              name = "do-push-release";
+              command = ''
+                attic push alpha:release-public \
+                  $(nix build .#checks.x86_64-linux.hm --no-link --print-out-paths) \
+                  $(nix build .#checks.aarch64-linux.hm --no-link --print-out-paths)
+              '';
+            }
+          ];
+        });
       }))
     // {
       # Expose the Home Manager configuration builder
