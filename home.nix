@@ -28,6 +28,10 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
+
+    (pkgs.writeShellScriptBin "do-update-home-manager" ''
+      exec home-manager switch --refresh --update-input home-manager
+    '')
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
