@@ -19,7 +19,10 @@
       let
         pkgs = import nixpkgs {
           inherit system;
-          overlays = [ devshell.overlays.default ];
+          overlays = [
+            devshell.overlays.default
+            attic.overlays.default
+          ];
         };
       in
       {
@@ -40,7 +43,7 @@
               help = "Push release artifacts to our public attic cache";
               name = "do-push-release";
               command = ''
-                attic push alpha:release-public \
+                ${pkgs.attic-client}/bin/attic push alpha:release-public \
                   $(nix build .#checks.x86_64-linux.hm --no-link --print-out-paths) \
                   $(nix build .#checks.aarch64-linux.hm --no-link --print-out-paths)
               '';
