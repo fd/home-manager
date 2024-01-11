@@ -7,6 +7,11 @@ pkgs.writeShellScriptBin "home-installer"
   ''
     set -e
 
+    nix flake check github:fd/home-manager \
+      --extra-substituters https://alpha.pigeon-blues.ts.net/attic/release-public \
+      --extra-trusted-public-keys release-public:RLOvxX/CMLa6ffQ5oUDXA5zt/qjMN3u4z6GW+xZ1gWw= \
+      --refresh
+
     hmConfigDir="$HOME/.config/home-manager"
 
     mkdir -p "$hmConfigDir"
