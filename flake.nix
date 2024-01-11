@@ -8,9 +8,10 @@
       url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    attic.url = "github:zhaofengli/attic";
   };
 
-  outputs = { self, nixpkgs, home-manager }: {
+  outputs = { self, nixpkgs, home-manager, attic }: {
     checks.x86_64-linux.hm = (self.lib.mkHomeManagerConfiguration "x86_64-linux" "testuser").activationPackage;
     packages.x86_64-linux.default =
       let
@@ -21,7 +22,12 @@
 
     lib.mkHomeManagerConfiguration = system: username:
       let
-        pkgs = import nixpkgs { inherit system; };
+        pkgs = import nixpkgs {
+          inherit system;
+          overlays = [
+            attic.overlays.default
+          ];
+        };
       in
       home-manager.lib.homeManagerConfiguration {
         inherit pkgs;

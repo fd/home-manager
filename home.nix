@@ -13,6 +13,7 @@
   # environment.
   home.packages = [
     pkgs.vault
+    pkgs.attic-client
 
     # Install the _update and switch_ script
     (pkgs.writeShellScriptBin "do-update-home-manager" ''
@@ -66,10 +67,12 @@
     extra-substituters = [
       "https://alpha.pigeon-blues.ts.net/attic/develop"
       "https://alpha.pigeon-blues.ts.net/attic/build"
+      "https://alpha.pigeon-blues.ts.net/attic/release-public"
     ];
     extra-trusted-public-keys = [
       "develop:g8DK7dPXGkipkqGEz92jSvbqFI87mFBRcnin0g2WbYY="
       "build:ks4ql2Pq6tLQOENz6AHWZpB8Qc+If/AOC0jjj65PkR8="
+      "release-public:RLOvxX/CMLa6ffQ5oUDXA5zt/qjMN3u4z6GW+xZ1gWw="
     ];
   };
 }
