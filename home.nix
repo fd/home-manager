@@ -14,6 +14,7 @@
   home.packages = [
     pkgs.vault
     pkgs.attic-client
+    pkgs.curl
 
     # Install the _update and switch_ script
     (pkgs.writeShellScriptBin "do-update-home-manager" ''

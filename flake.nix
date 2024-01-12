@@ -78,6 +78,7 @@
               home.homeDirectory = "/home/${username}";
             }
             ./home.nix
+            ./auto-gc.nix
           ];
 
           # Optionally use extraSpecialArgs
