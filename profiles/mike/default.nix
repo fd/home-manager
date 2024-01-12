@@ -12,6 +12,6 @@
       }
 
       # Green ';' when exit status is 0, red otherwise.
-      PS1="$(_bash_prompt)"
+      PS1='$(_bash_prompt)'
     '';
 }
