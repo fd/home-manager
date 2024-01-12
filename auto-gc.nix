@@ -10,6 +10,10 @@
       OnCalendar = "Mon *-*-* 00:00:00";
       Persistent = true;
     };
+
+    Install = {
+      WantedBy = "multi-user.target";
+    };
   };
 
   systemd.user.services.nix-auto-gc = {
