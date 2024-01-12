@@ -88,4 +88,6 @@
       "release-public:RLOvxX/CMLa6ffQ5oUDXA5zt/qjMN3u4z6GW+xZ1gWw="
     ];
   };
+
+  systemd.user.startServices = "sd-switch";
 }
