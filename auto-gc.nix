@@ -1,4 +1,4 @@
-{}:
+{ pkgs, ... }:
 {
   systemd.user.timers.nix-auto-gc = {
     Unit = {
