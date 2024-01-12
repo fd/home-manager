@@ -15,6 +15,8 @@
     pkgs.vault
     pkgs.attic-client
     pkgs.curl
+    pkgs.dig
+    pkgs.openssh
 
     # Install the _update and switch_ script
     (pkgs.writeShellScriptBin "do-update-home-manager" ''
@@ -59,7 +61,7 @@
   #  /etc/profiles/per-user/mike/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    # EDITOR = "emacs";
+    EDITOR = "vim";
     GH_BROWSER = "x-www-browser";
   };
 
@@ -67,6 +69,12 @@
   programs.home-manager.enable = true;
   programs.vim.enable = true;
   programs.bash.enable = true;
+  programs.bash.enableCompletion = true;
+  # Make sure completions are loaded
+  programs.bash.initExtra =
+    ''
+      export XDG_DATA_DIRS=$HOME/.nix-profile/share:$XDG_DATA_DIRS
+    '';
   programs.starship.enable = true;
   programs.atuin.enable = true;
   programs.git.enable = true;
