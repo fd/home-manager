@@ -24,17 +24,42 @@
             attic.overlays.default
           ];
         };
+
+        # list all profiles
+        profiles = [ "testuser" ] ++ (
+          builtins.filter
+            (x: x != null)
+            (
+              builtins.map
+                (name: if builtins.pathExists ./profiles/${name}/default.nix then name else null)
+                (builtins.attrNames (builtins.readDir ./profiles))
+            )
+        );
+
+        activationPackages = builtins.map (x: (self.lib.mkHomeManagerConfiguration system x).activationPackage) profiles;
+
+        allProfiles = pkgs.runCommandNoCC "all-profiles"
+          {
+            activationPackages = activationPackages;
+          }
+          ''
+            mkdir -p $out
+            for profile in $activationPackages; do
+              ln -s $profile $out/
+            done
+          '';
       in
       {
         # Ensure we can build Home Manager activation package
         checks = {
-          hm = (self.lib.mkHomeManagerConfiguration system "testuser").activationPackage;
+          allProfiles = self.packages.${system}.allProfiles;
           installer = self.packages.${system}.default;
         };
 
         # Expose the installer
         packages = {
           default = pkgs.callPackage ./installer/command.nix { inherit self home-manager; };
+          allProfiles = allProfiles;
         };
 
         devShells.default = pkgs.devshell.mkShell ({ config, ... }: {
@@ -44,10 +69,10 @@
               name = "do-push-release";
               command = ''
                 ${pkgs.attic-client}/bin/attic push alpha:release-public \
-                  $(nix build .#checks.x86_64-linux.hm --no-link --print-out-paths) \
-                  $(nix build .#checks.aarch64-linux.hm --no-link --print-out-paths) \
-                  $(nix build .#checks.x86_64-linux.installer --no-link --print-out-paths) \
-                  $(nix build .#checks.aarch64-linux.installer --no-link --print-out-paths)
+                  $(nix build .#packages.x86_64-linux.allProfiles --no-link --print-out-paths) \
+                  $(nix build .#packages.aarch64-linux.allProfiles --no-link --print-out-paths) \
+                  $(nix build .#packages.x86_64-linux.default --no-link --print-out-paths) \
+                  $(nix build .#packages.aarch64-linux.default --no-link --print-out-paths)
               '';
             }
           ];
@@ -79,7 +104,7 @@
             }
             ./home.nix
             ./auto-gc.nix
-          ];
+          ] ++ (if builtins.pathExists ./profiles/${username}/default.nix then [ ./profiles/${username}/default.nix ] else [ ]);
 
           # Optionally use extraSpecialArgs
           # to pass through arguments to home.nix

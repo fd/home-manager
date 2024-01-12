@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 {
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -75,12 +75,12 @@
     ''
       export XDG_DATA_DIRS=$HOME/.nix-profile/share:$XDG_DATA_DIRS
     '';
-  programs.starship.enable = true;
+  programs.starship.enable = lib.mkDefault true;
   programs.atuin.enable = true;
   programs.git.enable = true;
   programs.gh.enable = true;
   programs.gh.gitCredentialHelper.enable = true;
-  programs.direnv.enable = true;
+  programs.direnv.enable = lib.mkDefault true;
   programs.direnv.nix-direnv.enable = true;
 
   nix.package = pkgs.nix;
