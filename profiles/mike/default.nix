@@ -1,4 +1,4 @@
-{}:
+{ ... }:
 {
   programs.starship.enable = false;
   programs.bash.initExtra =
