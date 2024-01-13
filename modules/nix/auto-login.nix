@@ -30,6 +30,7 @@ in
       !include github-access-token.conf
     '';
 
+  # Rerun when the github credentials file changes
   systemd.user.paths.nix-auto-login = {
     Unit = {
       Description = "Nix auto login to caches";
