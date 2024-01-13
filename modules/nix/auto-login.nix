@@ -8,6 +8,9 @@ let
   do-login = pkgs.writeShellScript "do-login" ''
     set -e
     
+    mkdir -p ${config.home.homeDirectory}/.config/nix
+    mkdir -p ${config.home.homeDirectory}/.config/attic
+
     echo -e "machine alpha.pigeon-blues.ts.net\npassword $(${pkgs.gh}/bin/gh auth token)" > ${nixNetRcFile}
     echo "extra-access-tokens = github.com=$(${pkgs.gh}/bin/gh auth token)" > ${nixGithubCredsFile}
     echo -e "default-server = \"alpha\"\n[servers.alpha]\nendpoint = \"https://alpha.pigeon-blues.ts.net/attic/\"\ntoken = \"$(${pkgs.gh}/bin/gh auth token)\"" > ${atticConfigFile}
