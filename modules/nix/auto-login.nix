@@ -10,6 +10,10 @@ let
   '';
 in
 {
+  nix.settings = {
+    netrc-file = nixNetRcFile;
+  };
+
   systemd.user.paths.nix-auto-login = {
     Unit = {
       Description = "Nix auto login to caches";
