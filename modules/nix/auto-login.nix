@@ -3,15 +3,18 @@ let
   ghCredsFile = "${config.home.homeDirectory}/.config/gh/hosts.yml";
   nixNetRcFile = "${config.home.homeDirectory}/.config/nix/netrc";
   nixGithubCredsFile = "${config.home.homeDirectory}/.config/nix/github-access-token.conf";
+  atticConfigFile = "${config.home.homeDirectory}/.config/attic/config.toml";
 
   do-login = pkgs.writeShellScript "do-login" ''
     set -e
     
     echo -e "machine alpha.pigeon-blues.ts.net\npassword $(${pkgs.gh}/bin/gh auth token)" > ${nixNetRcFile}
     echo "extra-access-tokens = github.com=$(${pkgs.gh}/bin/gh auth token)" > ${nixGithubCredsFile}
+    echo -e "default-server = \"alpha\"\n[servers.alpha]\nendpoint = \"https://alpha.pigeon-blues.ts.net/attic/\"\ntoken = \"$(${pkgs.gh}/bin/gh auth token)\"" > ${atticConfigFile}
 
     chmod 600 ${nixNetRcFile}
     chmod 600 ${nixGithubCredsFile}
+    chmod 600 ${atticConfigFile}
   '';
 in
 {
