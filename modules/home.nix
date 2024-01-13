@@ -94,6 +94,7 @@
   programs.gh.gitCredentialHelper.enable = true;
   programs.direnv.enable = lib.mkDefault true;
   programs.direnv.nix-direnv.enable = true;
+  programs.htop.enable = true;
 
   nix.package = pkgs.nix;
   nix.settings = {
@@ -101,11 +102,13 @@
       "https://alpha.pigeon-blues.ts.net/attic/develop"
       "https://alpha.pigeon-blues.ts.net/attic/build"
       "https://alpha.pigeon-blues.ts.net/attic/release-public"
+      "https://alpha.pigeon-blues.ts.net/attic/release-private"
     ];
     extra-trusted-public-keys = [
       "develop:g8DK7dPXGkipkqGEz92jSvbqFI87mFBRcnin0g2WbYY="
       "build:ks4ql2Pq6tLQOENz6AHWZpB8Qc+If/AOC0jjj65PkR8="
       "release-public:RLOvxX/CMLa6ffQ5oUDXA5zt/qjMN3u4z6GW+xZ1gWw="
+      "release-private:QFn22PlqxQAQYaaRhrQXE0otSVzxx35VWos8qyRGijs="
     ];
   };
 
