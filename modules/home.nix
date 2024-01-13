@@ -17,6 +17,18 @@
     pkgs.curl
     pkgs.dig
     pkgs.openssh
+    pkgs.shopify-cli
+
+    pkgs.awscli2
+    (pkgs.google-cloud-sdk.withExtraComponents (
+      with pkgs.google-cloud-sdk.components;
+      [
+        gsutil
+        docker-credential-gcr
+        gke-gcloud-auth-plugin
+        cloud_sql_proxy
+      ]
+    ))
 
     # Install the _update and switch_ script
     (pkgs.writeShellScriptBin "do-update-home-manager" ''

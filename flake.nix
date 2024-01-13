@@ -9,12 +9,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     attic.url = "github:zhaofengli/attic";
+    shopify-cli.url = "github:mrhenry/nix-shopify-cli";
 
     flake-utils.url = "github:numtide/flake-utils";
     devshell.url = "github:numtide/devshell";
   };
 
-  outputs = { self, nixpkgs, flake-utils, devshell, home-manager, attic }:
+  outputs = { self, nixpkgs, flake-utils, devshell, home-manager, attic, shopify-cli }:
     (flake-utils.lib.eachSystem [ "x86_64-linux" "aarch64-linux" ] (system:
       let
         pkgs = import nixpkgs {
@@ -22,6 +23,7 @@
           overlays = [
             devshell.overlays.default
             attic.overlays.default
+            (self: super: { shopify-cli = shopify-cli.packages.${system}.default; })
           ];
         };
 
@@ -102,8 +104,8 @@
               home.username = username;
               home.homeDirectory = "/home/${username}";
             }
-            ./home.nix
-            ./auto-gc.nix
+            ./modules/home.nix
+            ./modules/nix/auto-gc.nix
           ] ++ (if builtins.pathExists ./profiles/${username}/default.nix then [ ./profiles/${username}/default.nix ] else [ ]);
 
           # Optionally use extraSpecialArgs
