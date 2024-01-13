@@ -29,6 +29,7 @@ in
   systemd.user.services.attic-watch-store = {
     Unit = {
       Description = "Push developer caches to attic";
+      ConditionPathExists = atticConfigFile;
     };
 
     Service = {
