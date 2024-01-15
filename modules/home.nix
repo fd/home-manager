@@ -32,7 +32,7 @@
 
     # Install the _update and switch_ script
     (pkgs.writeShellScriptBin "do-update-home-manager" ''
-      nix flake check github:fd/home-manager \
+      nix flake check github:mrhenry/home-manager \
         --extra-substituters https://alpha.pigeon-blues.ts.net/attic/release-public \
         --extra-trusted-public-keys release-public:RLOvxX/CMLa6ffQ5oUDXA5zt/qjMN3u4z6GW+xZ1gWw= \
         --refresh
