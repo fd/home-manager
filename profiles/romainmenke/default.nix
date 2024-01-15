@@ -7,9 +7,9 @@
       
       _bash_prompt() {
           if [[ $? == 0 ]]; then
-              echo -e "\e[32m;\e[0m"
+              echo -e "\e[32m;;\e[0m"
           else
-              echo -e "\e[31m;\e[0m"
+              echo -e "\e[31m;;\e[0m"
           fi
       }
 
