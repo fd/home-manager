@@ -44,6 +44,11 @@
       echo "Opening $@" > /dev/stderr
       exec mac open "$@"
     '')
+
+    (pkgs.writeShellScriptBin "code" ''
+      set -e
+      exec mac code "--remote=ssh-remote+$USER@$(hostname)@orb" "$@"
+    '')
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
