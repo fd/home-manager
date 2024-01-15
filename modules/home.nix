@@ -89,7 +89,10 @@
     '';
   programs.starship.enable = lib.mkDefault true;
   programs.atuin.enable = true;
-  programs.git.enable = true;
+  programs.git = {
+    enable = true;
+    ignores = [ ".DS_Store" ];
+  };
   programs.gh.enable = true;
   programs.gh.gitCredentialHelper.enable = true;
   programs.direnv.enable = lib.mkDefault true;
