@@ -44,7 +44,6 @@ in
     };
 
     Path = {
-      PathExists = ghCredsFile;
       PathChanged = ghCredsFile;
     };
 
