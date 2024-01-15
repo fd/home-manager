@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 {
   programs.starship.enable = false;
+  programs.atuin.enable = false;
   programs.bash.initExtra =
     ''
       # Green ';' when exit status is 0, red otherwise.

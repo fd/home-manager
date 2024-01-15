@@ -88,7 +88,7 @@
       export XDG_DATA_DIRS=$HOME/.nix-profile/share:$XDG_DATA_DIRS
     '';
   programs.starship.enable = lib.mkDefault true;
-  programs.atuin.enable = true;
+  programs.atuin.enable = lib.mkDefault true;
   programs.git = {
     enable = true;
     ignores = [ ".DS_Store" ];
