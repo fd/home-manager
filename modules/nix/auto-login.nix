@@ -61,6 +61,7 @@ in
     Service = {
       Type = "oneshot";
       ExecStart = do-login;
+      RestartSec = 2;
     };
   };
 }

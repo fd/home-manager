@@ -23,6 +23,7 @@ in
     Service = {
       Type = "oneshot";
       ExecStart = "systemctl --user restart attic-watch-store.service";
+      RestartSec = 2;
     };
   };
 
