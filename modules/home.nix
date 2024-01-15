@@ -99,7 +99,7 @@
   programs.direnv.nix-direnv.enable = true;
   programs.htop.enable = true;
 
-  nix.package = pkgs.nix;
+  nix.package = pkgs.nixVersions.nix_2_19;
   nix.settings = {
     extra-substituters = [
       "https://alpha.pigeon-blues.ts.net/attic/develop"
