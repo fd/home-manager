@@ -2,7 +2,7 @@
   description = "Home Manager configuration";
 
   inputs = {
-    home-manager.url = "github:fd/home-manager";
+    home-manager.url = "github:mrhenry/home-manager";
   };
 
   outputs = { self, home-manager }:
