@@ -1,4 +1,16 @@
 { pkgs, ... }:
+let
+  # Expire older home-manager generations and do a full garbage collection
+  do-gc = pkgs.writeShellScriptBin "do-gc" ''
+    set -e
+
+    # Expire older home-manager generations
+    ${pkgs.home-manager}/bin/home-manager expire-generations '-30 days'
+
+    # Do a full garbage collection
+    ${pkgs.nix}/bin/nix-collect-garbage
+  '';
+in
 {
   systemd.user.timers.nix-auto-gc = {
     Unit = {
@@ -23,7 +35,7 @@
 
     Service = {
       Type = "oneshot";
-      ExecStart = "${pkgs.nix}/bin/nix-collect-garbage";
+      ExecStart = "${do-gc}/bin/do-gc";
     };
   };
 }
