@@ -70,6 +70,21 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
+
+    ".vscode-server/data/Machine/settings.json".text = builtins.toJSON {
+      "nix.enableLanguageServer" = true;
+      "nix.serverPath" = "${pkgs.nil}/bin/nil";
+      "nix.serverSettings" = {
+        "nil" = {
+          "formatting" = {
+            "command" = [
+              # "nixpkgs-fmt"
+              "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt"
+            ];
+          };
+        };
+      };
+    };
   };
 
   # Home Manager can also manage your environment variables through
@@ -111,6 +126,7 @@
   programs.htop.enable = true;
 
   programs.vscode.userSettings = {
+    "nix.enableLanguageServer" = true;
     "nix.serverPath" = "${pkgs.nil}/bin/nil";
     "nix.serverSettings" = {
       "nil" = {
