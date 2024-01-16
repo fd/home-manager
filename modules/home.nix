@@ -110,6 +110,20 @@
   programs.direnv.nix-direnv.enable = true;
   programs.htop.enable = true;
 
+  programs.vscode.userSettings = {
+    "nix.serverPath" = "${pkgs.nil}/bin/nil";
+    "nix.serverSettings" = {
+      "nil" = {
+        "formatting" = {
+          "command" = [
+            # "nixpkgs-fmt"
+            "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt"
+          ];
+        };
+      };
+    };
+  };
+
   nix.package =
     # Update to the latest version of Nix
     assert !(pkgs.nixVersions ? nix_2_20);
