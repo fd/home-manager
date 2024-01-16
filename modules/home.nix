@@ -17,6 +17,7 @@
     pkgs.curl
     pkgs.dig
     pkgs.openssh
+    pkgs.nil
 
     # pkgs.shopify-cli
     # pkgs.awscli2
