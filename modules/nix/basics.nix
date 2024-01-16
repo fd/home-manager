@@ -1,3 +1,6 @@
+# This module makes sure the latests nix is used.
+# 
+# It also makes sure that the tests fail when the next version is released.
 { pkgs
 , ...
 }:

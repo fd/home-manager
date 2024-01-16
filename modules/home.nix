@@ -99,26 +99,47 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  # Setup the vim editor
   programs.vim.enable = true;
+
+  # Enable bash as the default shell
   programs.bash.enable = true;
-  programs.bash.enableCompletion = true;
+
   # Make sure completions are loaded
+  programs.bash.enableCompletion = true;
   programs.bash.initExtra =
     ''
       export XDG_DATA_DIRS=$HOME/.nix-profile/share:$XDG_DATA_DIRS
     '';
+
+  # Shell prompt
   programs.starship.enable = lib.mkDefault true;
+
+  # Shell history
   programs.atuin.enable = lib.mkDefault true;
+
+  # Setup git
   programs.git = {
     enable = true;
     ignores = [ ".DS_Store" ];
   };
+
+  # Setup GitHub CLI
   programs.gh.enable = true;
   programs.gh.gitCredentialHelper.enable = true;
+
+  # Setup Direnv
   programs.direnv.enable = lib.mkDefault true;
   programs.direnv.nix-direnv.enable = true;
+
+  # Setup htop
   programs.htop.enable = true;
 
+  # Enable the cache pusher
+  programs.attic-watch.enable = true;
+
+  # Setup the Nix
   nix.settings = {
     extra-substituters = [
       "https://alpha.pigeon-blues.ts.net/attic/develop"
