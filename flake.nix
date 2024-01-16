@@ -105,6 +105,7 @@
               home.homeDirectory = "/home/${username}";
             }
             ./modules/home.nix
+            ./modules/nix/basics.nix
             ./modules/nix/auto-gc.nix
             ./modules/nix/auto-login.nix
             ./modules/nix/watch-cache.nix

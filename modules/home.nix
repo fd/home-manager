@@ -1,12 +1,5 @@
 { pkgs, lib, ... }:
 {
-  assertions = [
-    {
-      assertion = !(pkgs.nixVersions ? nix_2_20);
-      message = "Nix 2.20 is available, please update this config.";
-    }
-  ];
-
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
@@ -125,11 +118,6 @@
   programs.direnv.enable = lib.mkDefault true;
   programs.direnv.nix-direnv.enable = true;
   programs.htop.enable = true;
-
-  nix.package =
-    # Update to the latest version of Nix
-    assert !(pkgs.nixVersions ? nix_2_20);
-    pkgs.nixVersions.nix_2_19;
 
   nix.settings = {
     extra-substituters = [
