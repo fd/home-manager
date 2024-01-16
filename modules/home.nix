@@ -46,7 +46,7 @@
       exec mac open "$@"
     '')
 
-    (pkgs.writeShellScriptBin "mrcode" ''
+    (pkgs.writeShellScriptBin "orbcode" ''
       set -e
       exec mac code "--remote=ssh-remote+$USER@$(hostname)@orb" "$@"
     '')
