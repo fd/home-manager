@@ -46,6 +46,10 @@
       exec mac open "$@"
     '')
 
+    # Install a alias in your Mac profile to open VSCode on the remote server
+    # ```sh
+    # alias orbcode="orb orbcode $(realpath $1)"
+    # ```
     (pkgs.writeShellScriptBin "orbcode" ''
       set -e
       exec mac code "--remote=ssh-remote+$USER@$(hostname)@orb" "$@"
