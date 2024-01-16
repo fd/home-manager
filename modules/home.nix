@@ -1,5 +1,12 @@
 { config, pkgs, lib, ... }:
 {
+  assertions = [
+    {
+      assertion = !(pkgs.nixVersions ? nix_2_20);
+      message = "Nix 2.20 is available, please update this config.";
+    }
+  ];
+
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
@@ -12,24 +19,18 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
+    # Tools for working with mrhenry projects.
     pkgs.vault
     pkgs.attic-client
+
+    # Basic tools
     pkgs.curl
     pkgs.dig
     pkgs.openssh
-    pkgs.nil
 
-    # pkgs.shopify-cli
-    # pkgs.awscli2
-    # (pkgs.google-cloud-sdk.withExtraComponents (
-    #   with pkgs.google-cloud-sdk.components;
-    #   [
-    #     gsutil
-    #     docker-credential-gcr
-    #     gke-gcloud-auth-plugin
-    #     cloud_sql_proxy
-    #   ]
-    # ))
+    # Nix language server
+    pkgs.nil
+    pkgs.nixpkgs-fmt
 
     # Install the _update and switch_ script
     (pkgs.writeShellScriptBin "do-update-home-manager" ''
@@ -40,7 +41,7 @@
       exec home-manager switch --refresh --update-input home-manager -b backup
     '')
 
-    # Install the _update and switch_ script
+    # Install the _open a browser_ tools
     (pkgs.writeShellScriptBin "x-www-browser" ''
       echo "Opening $@" > /dev/stderr
       exec mac open "$@"
@@ -109,7 +110,11 @@
   programs.direnv.nix-direnv.enable = true;
   programs.htop.enable = true;
 
-  nix.package = pkgs.nixVersions.nix_2_19;
+  nix.package =
+    # Update to the latest version of Nix
+    assert !(pkgs.nixVersions ? nix_2_20);
+    pkgs.nixVersions.nix_2_19;
+
   nix.settings = {
     extra-substituters = [
       "https://alpha.pigeon-blues.ts.net/attic/develop"
