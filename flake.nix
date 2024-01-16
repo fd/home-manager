@@ -9,13 +9,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     attic.url = "github:zhaofengli/attic";
-    shopify-cli.url = "github:mrhenry/nix-shopify-cli";
 
     flake-utils.url = "github:numtide/flake-utils";
     devshell.url = "github:numtide/devshell";
   };
 
-  outputs = { self, nixpkgs, flake-utils, devshell, home-manager, attic, shopify-cli }:
+  outputs = { self, nixpkgs, flake-utils, devshell, home-manager, attic }:
     (flake-utils.lib.eachSystem [ "x86_64-linux" "aarch64-linux" ] (system:
       let
         pkgs = import nixpkgs {
@@ -23,7 +22,6 @@
           overlays = [
             devshell.overlays.default
             attic.overlays.default
-            (self: super: { shopify-cli = shopify-cli.packages.${system}.default; })
           ];
         };
 
