@@ -71,6 +71,7 @@
     #   org.gradle.daemon.idletimeout=3600000
     # '';
 
+    # Teach VS Code to use the Nix language server
     ".vscode-server/data/Machine/settings.json".text = builtins.toJSON {
       "nix.enableLanguageServer" = true;
       "nix.serverPath" = "${pkgs.nil}/bin/nil";
@@ -124,21 +125,6 @@
   programs.direnv.enable = lib.mkDefault true;
   programs.direnv.nix-direnv.enable = true;
   programs.htop.enable = true;
-
-  programs.vscode.userSettings = {
-    "nix.enableLanguageServer" = true;
-    "nix.serverPath" = "${pkgs.nil}/bin/nil";
-    "nix.serverSettings" = {
-      "nil" = {
-        "formatting" = {
-          "command" = [
-            # "nixpkgs-fmt"
-            "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt"
-          ];
-        };
-      };
-    };
-  };
 
   nix.package =
     # Update to the latest version of Nix
