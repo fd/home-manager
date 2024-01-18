@@ -128,6 +128,9 @@
   programs.git = {
     enable = true;
     ignores = [ ".DS_Store" ];
+    extraConfig = {
+      include = { path = "config_profile"; };
+    };
   };
 
   # Setup GitHub CLI
