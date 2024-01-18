@@ -80,8 +80,8 @@
       };
 
       "remote.SSH.defaultExtensions" = [
-        "eamodio.gitlens"
-        "mutantdino.resourcemonitor"
+        "mkhl.direnv"
+        "jnoortheen.nix-ide"
       ];
     };
   };
