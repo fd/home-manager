@@ -9,7 +9,7 @@ let
     touch ${config.home.homeDirectory}/.config/git/config_profile
     config_profile="${config.home.homeDirectory}/.config/git/config_profile"
 
-    profile=$(gh api /user)
+    profile=$(${pkgs.gh}/bin/gh api /user)
     name="$(echo "$profile" | ${pkgs.jq}/bin/jq -r '.name')"
     email="$(echo "$profile" | ${pkgs.jq}/bin/jq -r '.email')"
 
