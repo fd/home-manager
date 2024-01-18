@@ -107,6 +107,7 @@
             ./modules/nix/auto-gc.nix
             ./modules/nix/auto-login.nix
             ./modules/nix/watch-cache.nix
+            ./modules/git/auto-setup-profile.nix
           ] ++ (if builtins.pathExists ./profiles/${username}/default.nix then [ ./profiles/${username}/default.nix ] else [ ]);
 
           # Optionally use extraSpecialArgs
