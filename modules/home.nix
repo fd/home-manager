@@ -78,6 +78,11 @@
           };
         };
       };
+
+      "remote.SSH.defaultExtensions" = [
+        "eamodio.gitlens"
+        "mutantdino.resourcemonitor"
+      ];
     };
   };
 
