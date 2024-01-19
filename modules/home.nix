@@ -34,12 +34,6 @@
       exec home-manager switch --refresh --update-input home-manager -b backup
     '')
 
-    # Install the _open a browser_ tools
-    (pkgs.writeShellScriptBin "x-www-browser" ''
-      echo "Opening $@" > /dev/stderr
-      exec mac open "$@"
-    '')
-
     # Install a alias in your Mac profile to open VSCode on the remote server
     # ```sh
     # alias orbcode="orb orbcode $(realpath $1)"
@@ -99,7 +93,6 @@
   #
   home.sessionVariables = {
     EDITOR = "vim";
-    GH_BROWSER = "x-www-browser";
   };
 
   # Let Home Manager install and manage itself.
