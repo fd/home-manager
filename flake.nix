@@ -104,7 +104,6 @@
             }
             ./modules/home.nix
             ./modules/nix/basics.nix
-            ./modules/nix/auto-gc.nix
             ./modules/nix/auto-login.nix
             ./modules/nix/watch-cache.nix
             ./modules/git/auto-setup-profile.nix

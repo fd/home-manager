@@ -66,7 +66,6 @@
         "nil" = {
           "formatting" = {
             "command" = [
-              # "nixpkgs-fmt"
               "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt"
             ];
           };
