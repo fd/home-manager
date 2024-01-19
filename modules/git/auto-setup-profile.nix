@@ -4,6 +4,7 @@ let
 
   do-setup = pkgs.writeShellScript "do-setup" ''
     set -e
+    export PATH="${pkgs.coreutils}/bin:$PATH"
     
     mkdir -p ${config.home.homeDirectory}/.config/git
     touch ${config.home.homeDirectory}/.config/git/config_profile

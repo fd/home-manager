@@ -7,6 +7,7 @@ let
 
   do-login = pkgs.writeShellScript "do-login" ''
     set -e
+    export PATH="${pkgs.coreutils}/bin:$PATH"
     
     mkdir -p ${config.home.homeDirectory}/.config/nix
     mkdir -p ${config.home.homeDirectory}/.config/attic
