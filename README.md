@@ -11,5 +11,4 @@
 
 - [ ] Setup nix remote builders
 - [ ] Setup git commit signing
-- [ ] Add a `code` ssh helper
 - [ ] `home-manager expire-generations` auto expire
